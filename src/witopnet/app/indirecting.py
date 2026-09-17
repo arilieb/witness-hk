@@ -7,6 +7,7 @@ simple indirect mode demo support classes
 """
 
 import datetime
+import os
 import time
 
 import falcon
@@ -122,6 +123,7 @@ class WitnessStart(doing.DoDoer):
         self.wind(tymth)
         self.tock = tock
         _ = yield self.tock
+        escrowTock = float(os.getenv("WITOPNET_ESCROW_TOCK", "0.5"))
 
         while True:
             self.kvy.processEscrows()
@@ -130,7 +132,7 @@ class WitnessStart(doing.DoDoer):
                 self.tvy.processEscrows()
             self.exc.processEscrow()
 
-            yield
+            yield escrowTock
 
     def cueDo(self, tymth=None, tock=0.0, **kwa):
         """
