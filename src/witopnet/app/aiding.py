@@ -176,9 +176,13 @@ class AidCollectionEnd:
         if len(kever.verfers) > 1:
             totps = []
             for member_verfer in kever.verfers:
-                if member_verfer.code not in (coring.MtrDex.Ed25519N, coring.MtrDex.Ed25519):
+                if member_verfer.code not in (
+                    coring.MtrDex.Ed25519N,
+                    coring.MtrDex.Ed25519,
+                ):
                     raise ValueError(
-                        "Unsupported verkey derivation code = {}." "".format(member_verfer.code)
+                        "Unsupported verkey derivation code = {}."
+                        "".format(member_verfer.code)
                     )
                 member_encrypter = core.Encrypter(verkey=member_verfer.qb64b)
                 totps.append(member_encrypter.encrypt(ser=seedqb64b).qb64)
